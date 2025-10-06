@@ -57,6 +57,16 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Generate a new module
+```bash
+nest g module <moduleName>
+```
+
+## Generate a new resource (module, controller, service, dto)
+```bash
+nest g resource <resourceName>
+```
+
 ## Database
 
 ### Run PostgreSQL with Docker
