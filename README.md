@@ -110,3 +110,6 @@ Prisma schema loaded from prisma/schema.prisma
 Prisma Studio is up on http://localhost:5555
 Prisma schema loaded from prisma/schema.prisma
 ```
+
+## JWT - JSON Web Token
+[JWT](https://docs.nestjs.com/security/authentication#jwt-token)
