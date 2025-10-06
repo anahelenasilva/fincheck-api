@@ -82,3 +82,21 @@ CREATE DATABASE fincheck;
 ## ORM - Object Relational Mapping
 [Prisma](https://www.prisma.io/)
 
+### Run Prisma migration
+```bash
+npx prisma migrate dev
+```
+After running this command, enter a name for the new migration.
+
+### Prisma Studio
+```bash
+npx prisma studio
+```
+
+Result output:
+```
+Environment variables loaded from .env
+Prisma schema loaded from prisma/schema.prisma
+Prisma Studio is up on http://localhost:5555
+Prisma schema loaded from prisma/schema.prisma
+```
