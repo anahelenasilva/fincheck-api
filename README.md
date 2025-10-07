@@ -113,3 +113,7 @@ Prisma schema loaded from prisma/schema.prisma
 
 ## JWT - JSON Web Token
 [JWT](https://docs.nestjs.com/security/authentication#jwt-token)
+
+
+## Guards
+[Guards](https://docs.nestjs.com/guards) have a single responsibility. They determine whether a given request will be handled by the route handler or not, depending on certain conditions (like permissions, roles, ACLs, etc.) present at run-time.
