@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcryptjs';
 
 import { UsersRepository } from '../../shared/database/repositories/users.repositories';
-import { AuthenticateDto } from './dto/authenticate.dto';
+import { SigninDto } from './dto/signin.dto';
 import { SignUpDto } from './dto/signup.dto';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthService {
     private readonly jwtService: JwtService
   ) { }
 
-  async authenticate({ email, password }: AuthenticateDto) {
+  async signin({ email, password }: SigninDto) {
     const user = await this.usersRepo.findUnique({
       where: { email },
     });
@@ -28,9 +28,7 @@ export class AuthService {
       return new UnauthorizedException('Invalid credentials');
     }
 
-    const accessToken = await this.jwtService.signAsync({
-      sub: user.id,
-    });
+    const accessToken = await this.generateAccessToken(user.id);
 
     return { accessToken };
   }
@@ -77,6 +75,12 @@ export class AuthService {
       }
     });
 
-    return user;
+    const accessToken = await this.generateAccessToken(user.id);
+
+    return { accessToken };
+  }
+
+  private async generateAccessToken(userId: string) {
+    return await this.jwtService.signAsync({ sub: userId });
   }
 }
