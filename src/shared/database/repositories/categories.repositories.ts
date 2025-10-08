@@ -12,4 +12,10 @@ export class CategoriesRepository {
     const categories = await this.prismaService.category.findMany(dto);
     return categories;
   }
+
+  async findFirst(userId: string, categoryId: string) {
+    return await this.prismaService.category.findFirst({
+      where: { userId, id: categoryId },
+    });
+  }
 }
