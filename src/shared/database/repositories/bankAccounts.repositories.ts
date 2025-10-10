@@ -10,9 +10,28 @@ export class BankAccountsRepository {
   async findAllByUserId(userId: string) {
     const bankAccounts = await this.prismaService.bankAccount.findMany({
       where: { userId },
+      include: {
+        transactions: {
+          select: {
+            type: true,
+            amount: true,
+          },
+        },
+      },
     });
 
-    return bankAccounts;
+    return bankAccounts.map(({ transactions, ...bankAccount }) => {
+      const totalTransactions = transactions.reduce((acc, transaction) => (
+        acc + (transaction.type === 'INCOME' ? transaction.amount : -transaction.amount)
+      ), 0);
+
+      const currentBalance = bankAccount.initialBalance + totalTransactions;
+
+      return {
+        ...bankAccount,
+        currentBalance,
+      };
+    });
   }
 
   async findFirst(userId: string, bankAccountId: string) {
