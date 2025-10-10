@@ -77,7 +77,7 @@ model Transaction {
   name          String
   amount        Float
   type          TransactionType
-  date          String
+  date          DateTime
 
   user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   bankAccount BankAccount @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)

@@ -3,6 +3,7 @@ import { TransactionsRepository } from 'src/shared/database/repositories/transac
 import { ValidateBankAccountOwnershipService } from '../../bank-accounts/services/validate-bank-account-ownership.service';
 import { ValidateCategoryOwnershipService } from '../../categories/services/validate-category-ownership.service';
 import { CreateTransactionDto } from '../dto/create-transaction.dto';
+import { FindAllFiltersDto } from '../dto/find-all-filters.dto';
 import { UpdateTransactionDto } from '../dto/update-transaction.dto';
 import { ValidateEntitiesOwnershipDto } from '../dto/validate-entities-ownership.dto';
 import { ValidateTransactionOwnershipService } from './validate-transaction-ownership.service';
@@ -29,13 +30,13 @@ export class TransactionsService {
         name,
         amount,
         type,
-        date
+        date: new Date(date),
       }
     });
   }
 
-  async findAllByUserId(userId: string) {
-    return await this.transactionsRepo.findAllByUserId(userId);
+  async findAllByUserId(userId: string, filters: FindAllFiltersDto) {
+    return await this.transactionsRepo.findAllByUserId(userId, filters);
   }
 
   async update(userId: string, transactionId: string, dto: UpdateTransactionDto) {
