@@ -89,6 +89,11 @@ psql -U root
 CREATE DATABASE fincheck;
 ```
 
+### Start docker
+```bash
+docker start pg
+```
+
 ## ORM - Object Relational Mapping
 [Prisma](https://www.prisma.io/)
 
