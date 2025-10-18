@@ -19,13 +19,14 @@ export class AuthService {
     });
 
     if (!user) {
-      return new UnauthorizedException('Invalid credentials');
+      console.log('User not found with email:', email);
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) {
-      return new UnauthorizedException('Invalid credentials');
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     const accessToken = await this.generateAccessToken(user.id);
